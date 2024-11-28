@@ -20,9 +20,13 @@ defineProps<{
         <img :src="logoImage" alt="Logo" width="60" height="40" class="d-inline-block align-text-top object-fit-contain">
         Health Tracker
       </a>
-      <h3 v-if="isLoggedIn" class="text-success" >Welcome, </h3>
+      <div v-if="isLoggedIn"  class="d-flex flex-row justify-content-between">
+        <h3 class="text-success">Welcome </h3>
+        <button class="btn btn-danger">Logout</button>
+      </div>
+
       <form v-else method="get" action="http://localhost:8081/api">
-        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-primary ml-2" type="submit">Login</button>
       </form>
 
     </div>

@@ -10,14 +10,14 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     children : [
       {
-        path : "home",
+        path : "",
         name : "HomePage",
         component :HomePage
 
       }
     ]
 
-  },
+  }
 ]
 
 const router   = createRouter({
