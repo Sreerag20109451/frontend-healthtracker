@@ -4,7 +4,7 @@ import {getUserFromLocalStorage} from "@/utils/utils";
 export  const useLoginStore =  defineStore(
     "loginStore",{
         state : () => (
-            {isLoggedIn : true}
+            {isLoggedIn : false}
         ),
         actions: {
             toggleLogin(){

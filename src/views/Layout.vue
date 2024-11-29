@@ -18,10 +18,14 @@ const {user} = useUserStore()
 
 <template>
 
-  <Navbar :user="user" :isLoggedIn="isLoggedIn"></Navbar>
-  <RouterView>
+  <Navbar :user="user" :isLoggedIn="isLoggedIn" class="sticky top-0"></Navbar>
+  <main class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <RouterView>
 
-  </RouterView>
+    </RouterView>
+
+  </main>
+
 
 
 </template>

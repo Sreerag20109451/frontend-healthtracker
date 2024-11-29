@@ -16,12 +16,12 @@ const {isAdmin} = storeToRefs(useUserStore())
 
 <template>
 
-  <DefaultHome v-if="!isLoggedIn"/>
+  <DefaultHome v-if="!isLoggedIn" />
   <LoggedHome v-else></LoggedHome>
-
 
 </template>
 
-<style scoped>
+<style>
+
 
 </style>

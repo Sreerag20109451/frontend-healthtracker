@@ -14,14 +14,16 @@ defineProps<{
 </script>
 
 <template>
-  <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
+  <nav class="navbar bg-body-tertiary w-screen" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img :src="logoImage" alt="Logo" width="60" height="40" class="d-inline-block align-text-top object-fit-contain">
-        Health Tracker
+        <div class="flex flex-row items-center justify-center">
+          <img :src="logoImage" alt="Logo" width="60" height="40" class="d-inline-block align-text-top rounded-full object-fit-contain">
+          <h3>HealthTracker</h3>
+        </div>
+
       </a>
       <div v-if="isLoggedIn"  class="d-flex flex-row justify-content-between">
-        <h3 class="text-success">Welcome </h3>
         <button class="btn btn-danger">Logout</button>
       </div>
 
