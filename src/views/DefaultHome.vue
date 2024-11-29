@@ -2,13 +2,18 @@
 
 
 import HomeCarousel from "@/components/HomeCarousel.vue";
+import LoginModal from "@/components/LoginModal.vue";
+import {storeToRefs} from "pinia";
+import {ModalStore} from "@/store";
 
-console.log("dsd")
+const {isModalOpen} =  storeToRefs(ModalStore())
 
+console.log(isModalOpen.value)
 </script>
 
+
 <template>
-  <section >
+  <section v-if="!isModalOpen" >
     <div class="grid md:grid-cols-2 ml-10 mr-10 gap-y-8 md:gap-x-8 px-10 py-10 " >
 <!--      The text below are AI generated-->
       <div  class="flex flex-col ">
@@ -25,8 +30,10 @@ console.log("dsd")
       </div>
     </div>
 
-
   </section>
+  <div v-else>
+    <LoginModal :isModalOpen="isModalOpen"/>
+  </div>
 
 </template>
 

@@ -11,9 +11,9 @@ defineProps<{
 </script>
 
 <template>
-  <div class="bg-gradient-to-r from-cyan-500 to-blue-500  m shadow-xl rounded-xl">
+  <div class="bg-stone-100  m shadow-xl rounded-xl">
     <div class="card-body items-center text-center">
-      <h2 class="card-title mt-10 text-5xl text-pink-500">{{name}}</h2>
+      <h2 class="card-title mt-10 text-5xl text-slate-800">{{name}}</h2>
       <p class="text-2xl" id="paragraph">{{description}}</p>
     </div>
     <figure class=" ">
@@ -30,7 +30,7 @@ defineProps<{
 <style scoped>
 h2{
   font-family: "Caveat", cursive;
-  color: pink;
+
 }
 
 #paragraph{
