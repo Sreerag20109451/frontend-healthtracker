@@ -26,17 +26,14 @@ jobs:
 
   deploy:
     name: Railway Deploy
-    needs: build  # Specifies that the deploy job depends on the build job.
+    needs: build
     runs-on: ubuntu-latest  
-
+    
     steps:
-      - name: Checkout Repository  # Checks out the repository.
-        uses: actions/checkout@v4
-
-      - name: Install Railway CLI  # Installs the Railway CLI.
+      - uses: actions/checkout@v4
+      - name: Install Railway
         run: npm i -g @railway/cli
-
-      - name: Deploy to Railway  # Deploys the application to Railway.
+      - name: Deploy to Railway
         run: railway up --service ${{ secrets.RAILWAY_SERVICE }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
