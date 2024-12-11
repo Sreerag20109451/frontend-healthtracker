@@ -17,16 +17,8 @@ const {user} = useUserStore()
 </script>
 
 <template>
-
-  <Navbar :user="user" :isLoggedIn="isLoggedIn"  class="sticky top-0"></Navbar>
-  <main class="">
+  <Navbar :user="user" :isLoggedIn="isLoggedIn"  class="fixed-top"></Navbar>
     <RouterView>
-
     </RouterView>
-
-  </main>
-
-
-
 </template>
 
