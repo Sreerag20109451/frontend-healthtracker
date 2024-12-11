@@ -1,9 +1,9 @@
-name: Deploy to Github Pages  # Defines the name of the GitHub Actions workflow.
+name: Deploy to Railway
 
 on:
   push:
     branches:
-      - develop  # Triggers the workflow on each push to the 'develop' branch.
+      - main  # Triggers the workflow on each push to the 'main' branch.
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
 
       - name: Create Node Environment  # Sets up Node.js environment.
         uses: actions/setup-node@v4
-        with: 
+        with:
           node-version: 16.x
 
       - name: Install Packages and Build Application  # Installs npm packages and builds the Vue.js application.
@@ -24,32 +24,19 @@ jobs:
           npm ci
           npm run build
 
-      - name: Setup Pages  # Configures pages for deployment.
-        id: pages
-        uses: actions/configure-pages@v3
-
-      - name: Build with Jekyll  # Builds the application with Jekyll.
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./dist/
-          destination: ./_site
-
-      - name: Upload artifact  # Uploads the build artifact.
-        uses: actions/upload-pages-artifact@v2
-
   deploy:
     name: Railway Deploy
     needs: build  # Specifies that the deploy job depends on the build job.
     runs-on: ubuntu-latest  
-    
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout Repository  # Checks out the repository.
         uses: actions/checkout@v4
 
-      - name: Install Railway CLI
+      - name: Install Railway CLI  # Installs the Railway CLI.
         run: npm i -g @railway/cli
 
-      - name: Deploy to Railway
+      - name: Deploy to Railway  # Deploys the application to Railway.
         run: railway up --service ${{ secrets.RAILWAY_SERVICE }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
