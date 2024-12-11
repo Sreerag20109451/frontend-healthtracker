@@ -16,20 +16,17 @@ console.log(isModalOpen.value)
 
 
 <template>
-  <section v-if="!isModalOpen" class="flex min-h-screen max-w-full" >
-    <div class="my-auto mx-auto h-full">
-      <Hero/>
+  <section class="h-screen w-full">
+    <section v-if="!isModalOpen" class="flex min-h-screen max-w-full" >
+      <div class="my-auto mx-auto h-full">
+        <Hero/>
+      </div>
 
+    </section>
+    <div v-else class="flex max-h-screen max-w-1/2">
+      <LoginModal :isModalOpen="isModalOpen" class="my-52"/>
     </div>
-
-
-
-
   </section>
-  <div v-else>
-    <LoginModal :isModalOpen="isModalOpen"/>
-  </div>
-
 </template>
 
 <style>
