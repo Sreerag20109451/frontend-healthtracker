@@ -31,6 +31,7 @@ jobs:
       - name: Install Railway
         run: npm i -g @railway/cli
       - name: Deploy to Railway
-        run: railway deploy --service frontend-healthtracker --environment production
+        run: railway up --service frontend-healthtracker --environment production
+
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
