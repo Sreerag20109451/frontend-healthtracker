@@ -5,17 +5,17 @@ import {ModalStore, useLoginStore} from "@/store";
 const logoImage =  require("../assets/excercise.jpeg")
 
 const modalStore = ModalStore()
+const loginStore = useLoginStore()
 const {isModalOpen}  = storeToRefs(modalStore)
 const {isLoggedIn} = storeToRefs(useLoginStore())
 
-
+const logout  = () =>{
+  modalStore.toggleLoginModal()
+  localStorage.removeItem("user")
+  loginStore.toggleLogin()
+}
 console.log(isLoggedIn)
-
 console.log(modalStore.isModalOpen)
-
-
-
-
 </script>
 
 <template>
@@ -28,7 +28,7 @@ console.log(modalStore.isModalOpen)
         </div>
       </a>
       <div v-if="isLoggedIn"  class="d-flex flex-row justify-content-between">
-        <button class="btn btn-active btn-primary mr-10">Logout</button>
+        <button class="btn btn-active btn-primary mr-10" @click="logout"  >Logout</button>
       </div>
       <div v-else>
         <button class=" btn btn-active btn-primary mr-10" type="submit" @click="modalStore.toggleLoginModal()"  :hidden="isModalOpen">Login</button>
