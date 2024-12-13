@@ -1,3 +1,4 @@
+
 export  const getUserFromLocalStorage = () : User | null => {
 
     const user = localStorage.getItem("user")

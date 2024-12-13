@@ -11,7 +11,7 @@ import Hero from "@/components/Hero.vue";
 
 const {isModalOpen} =  storeToRefs(ModalStore())
 
-console.log(isModalOpen.value)
+
 </script>
 
 
@@ -24,7 +24,7 @@ console.log(isModalOpen.value)
 
     </section>
     <div v-else class="flex max-h-screen max-w-1/2">
-      <LoginModal :isModalOpen="isModalOpen" class="my-52"/>
+      <LoginModal :isModalOpen="isModalOpen" class="my-52 md:my-36"/>
     </div>
   </section>
 </template>
@@ -37,12 +37,6 @@ p{
   color: chartreuse;
 }
 
-#heading{
-  font-family: "Chewy", system-ui;
-  font-weight: 400;
-  font-style: normal;
-
-}
 
 #second-head{
   font-family: "Chewy", system-ui;
