@@ -18,13 +18,13 @@ const {isModalOpen} =  storeToRefs(ModalStore())
 <template>
   <section class="h-screen w-full">
     <section v-if="!isModalOpen" class="flex min-h-screen max-w-full" >
-      <div class="my-auto mx-auto h-full">
+      <div class="md:my-auto mt-36 md:mx-auto h-full ">
         <Hero/>
       </div>
 
     </section>
     <div v-else class="flex max-h-screen max-w-1/2">
-      <LoginModal :isModalOpen="isModalOpen" class="my-52 md:my-36"/>
+      <LoginModal :isModalOpen="isModalOpen" class="my-52 sm:my-36"/>
     </div>
   </section>
 </template>

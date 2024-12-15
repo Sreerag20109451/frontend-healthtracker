@@ -7,6 +7,11 @@ export  const useLoginStore =  defineStore(
         state : () => (
             {isLoggedIn :   getUserFromLocalStorage()? true : false , user : getUserFromLocalStorage() || null }
         ),
+        getters : {
+           isAdmin : (state) => {
+               return state.user?.role === "admin"
+           }
+        },
         actions: {
             toggleLogin(){
                 this.isLoggedIn = !this.isLoggedIn

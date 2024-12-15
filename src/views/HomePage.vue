@@ -12,7 +12,7 @@ const {isLoggedIn} = loginStore
 
 <template>
 
-  <main class="from-zinc-100 to-red-50 h-screen w-full">
+  <main class="h-screen w-full">
     <DefaultHome  v-if="!isLoggedIn"  />
     <LoggedHome v-else></LoggedHome>
 
