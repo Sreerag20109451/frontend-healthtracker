@@ -5,7 +5,6 @@ import HomeCarousel from "@/components/HomeCarousel.vue";
 import LoginModal from "@/components/LoginModal.vue";
 import {storeToRefs} from "pinia";
 import {ModalStore} from "@/store";
-import {features} from "@/utils/utils";
 import FeatureAccordion from "@/components/FeatureAccordion.vue";
 import Hero from "@/components/Hero.vue";
 
@@ -18,7 +17,7 @@ const {isModalOpen} =  storeToRefs(ModalStore())
 <template>
   <section class="h-screen w-full">
     <section v-if="!isModalOpen" class="flex min-h-screen max-w-full" >
-      <div class="md:my-auto mt-36 md:mx-auto h-full ">
+      <div class="md:my-auto  md:mx-auto h-full ">
         <Hero/>
       </div>
 

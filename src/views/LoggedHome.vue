@@ -15,7 +15,7 @@ const isAdmin = userStore.isAdmin
 
 <template>
 
-  <section class="h-screen">
+  <section class="h-screen w-3/4 mx-auto">
 
     <div v-if="isAdmin" id="admin" class="flex md:flex-col md:justify-center md:items-center">
       <AdminDashBoard/>

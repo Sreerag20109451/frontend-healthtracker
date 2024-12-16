@@ -20,7 +20,7 @@
           <button class="btn btn-secondary">Update Profile</button>
         </form>
         <form>
-          <button class="btn btn btn-danger"> Delete Profile</button>
+          <button class="btn btn-warning"> Delete Profile</button>
         </form>
       </div>
     </div>
