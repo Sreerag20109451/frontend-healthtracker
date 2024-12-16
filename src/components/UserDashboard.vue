@@ -3,8 +3,6 @@ import {storeToRefs} from "pinia";
 import {useLoginStore} from "@/store";
 import UserOperationSelection from "@/components/UserOperationSelection.vue";
 import {ref} from "vue";
-import {features} from "@/utils/utils";
-import Cards from "@/components/UserCard.vue";
 import UserCard from "@/components/UserCard.vue";
 import ActivitiesCard from "@/components/ActivitiesCard.vue";
 import ReportCard from "@/components/ReportCard.vue";
@@ -20,7 +18,7 @@ const operationLink = ref(null)
     </ul>
   </div>
   <div class="flex flex-col justify-center items-center space-y-6">
-    <h1>How do you do, {{user.name}}??</h1>
+    <h1 class="text-3xl">How do you do, {{user.name}}??</h1>
     <div class="grid grid-cols-1 md:grid-cols-3 md:gap-x-16 gap-y-10">
       <UserCard/>
       <ActivitiesCard/>
