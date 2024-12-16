@@ -1,43 +1,28 @@
 import {defineStore} from "pinia";
 import {getUserFromLocalStorage} from "@/utils/utils";
 
+
 export  const useLoginStore =  defineStore(
     "loginStore",{
         state : () => (
-            {isLoggedIn : false , loginModal : "login"}
+            {isLoggedIn :   getUserFromLocalStorage()? true : false , user : getUserFromLocalStorage() || null }
         ),
+        getters : {
+           isAdmin : (state) => {
+               return state.user?.role === "admin"
+           }
+        },
         actions: {
             toggleLogin(){
                 this.isLoggedIn = !this.isLoggedIn
+            },
+            setUser()  {
+                this.user = getUserFromLocalStorage()
             }
-
         }
     }
     )
-export const useUserStore = defineStore("userStore",{
-    state: () => {
-        return {user  : null as User | null, isAdmin: false, isSameUser: false}
-    },
-    getters: {
-        getUserDetails(state) {
-            if(state.user) return state.user
-            return null
-        },
-        setAdmin(state){
-          if(state.user && state.user.role == "admin") state.isAdmin = true
 
-        }
-    },
-    actions : {
-        setUser() {
-            const user : User | null = getUserFromLocalStorage()
-            if(user) this.$state.user = user
-
-        }
-
-
-    }
-})
 export  const ModalStore = defineStore("modalStore", {
     state : () =>{
         return {isModalOpen : false}
