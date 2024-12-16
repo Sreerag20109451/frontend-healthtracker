@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1734367381028" clover="3.2.0">
+  <project timestamp="1734367381028" name="All files">
+    <metrics statements="12" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="5" elements="22" coveredelements="20" complexity="0" loc="12" ncloc="12" packages="2" files="2" classes="2"/>
+    <package name="src.store">
+      <metrics statements="10" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="5"/>
+      <file name="index.ts" path="/home/sreerag/frontend-healthtracker/src/store/index.ts">
+        <metrics statements="10" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="5"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="8" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="tests.unit">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Fixtures.ts" path="/home/sreerag/frontend-healthtracker/tests/unit/Fixtures.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

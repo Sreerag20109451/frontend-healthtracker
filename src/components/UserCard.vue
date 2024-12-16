@@ -1,13 +1,4 @@
 <script setup lang="ts">
-defineProps<{
-
-  imageURL: string
-  name: string,
-  description: string
-
-}>()
-
-
 </script>
 
 <template>
@@ -26,7 +17,7 @@ defineProps<{
           <button class="btn btn-primary">Show Profile</button>
         </form>
         <form>
-          <button class="btn btn-secondary">Update Profile Profile</button>
+          <button class="btn btn-secondary">Update Profile</button>
         </form>
         <form>
           <button class="btn btn btn-danger"> Delete Profile</button>

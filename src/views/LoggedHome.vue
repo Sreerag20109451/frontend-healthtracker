@@ -4,6 +4,7 @@ import {storeToRefs} from "pinia";
 import {useLoginStore} from "@/store";
 import USERDASHBOARD from "@/components/UserDashboard.vue";
 import UserDashboard from "@/components/UserDashboard.vue";
+import AdminDashBoard from "@/components/AdminDashBoard.vue";
 
 const userStore = useLoginStore()
 const {user} = storeToRefs(userStore)
@@ -16,7 +17,8 @@ const isAdmin = userStore.isAdmin
 
   <section class="h-screen">
 
-    <div v-if="isAdmin" id="admin">
+    <div v-if="isAdmin" id="admin" class="flex md:flex-col md:justify-center md:items-center">
+      <AdminDashBoard/>
 
     </div>
     <div v-else class="flex md:flex-col md:justify-center md:items-center">
