@@ -20,7 +20,7 @@
           <button class="btn btn-secondary">Create an Activity</button>
         </form>
         <form>
-          <button class="btn btn btn-danger"> Delete an Activity</button>
+          <button class="btn btn !btn-danger"> Delete an Activity</button>
         </form>
       </div>
     </div>
