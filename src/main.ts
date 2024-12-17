@@ -15,5 +15,6 @@ app.use(Vue3Toastify, {
     autoClose: 3000,
 } as ToastContainerOptions);
 
+app.use(VueQueryPlugin)
 
 app.use(router).use(pinia).mount("#app")

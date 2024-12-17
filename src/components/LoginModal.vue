@@ -13,14 +13,19 @@ const email = ref("")
 const password = ref("")
 const login =  async  (e: Event) =>{
 
+  console.log("logging innn")
   e.preventDefault()
   try{
     const resp = await axiosInstance.post("/login", {
       email: email.value,
       password: password.value
     })
+
     const token = resp.data.token
-    const loggedInuser = resp.data.data
+    console.log(token)
+    const loggedInuser = resp.data.user
+    console.log(loggedInuser)
+    modalStore.toggleLoginModal()
     setUserToLocalStorage(loggedInuser)
     localStorage.setItem('token', token)
     loginStore.setUser()

@@ -27,6 +27,8 @@
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-transform-private-methods": "^7.25.9",
     "@primevue/auto-import-resolver": "^4.2.4",
     "@types/jest": "^27.0.1",
     "@vue/cli-plugin-babel": "~5.0.0",
