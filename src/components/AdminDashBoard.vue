@@ -5,13 +5,16 @@ import {ref} from "vue";
 import {useQuery} from "@tanstack/vue-query";
 import {axiosInstance} from "@/utils/axiosInstance";
 import router from "@/router";
+import {toast} from "vue3-toastify";
 const {user} = storeToRefs(useLoginStore())
 
-console.log(localStorage.getItem("token"))
 
+const searchItem = ref("")
+const userList    = ref<User[]>([])
+const loginStore = useLoginStore()
 const Sessionid =localStorage.getItem("sessionId")
-
 const selectedID = ref<number|string|null>(null)
+const hasFetched = ref<Boolean>(false)
 
 const getToDetails = (e :Event) =>{
   e.preventDefault()
@@ -20,7 +23,7 @@ const getToDetails = (e :Event) =>{
   router.push(`/users/${userID}`)
 }
 
-const { isPending, isError, data, error } = useQuery({ queryKey: ['user'], queryFn: async () =>
+const { isPending, isError, data  , error } = useQuery({ queryKey: ['user'], queryFn: async () =>
   {
     const response = await axiosInstance.get(`/users/`, {
       headers : {
@@ -31,14 +34,48 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['user'], query
     })
     if(response.status == 200) {
       if(response.data.data.length>0)
+        userList.value = response.data.data
+      hasFetched.value = true
       return response.data.data
+    }
+    if(response.status == 403){
+      toast.error("Uh oh, it seems you do not have access")
+      return response.status
+    }
+    if(response.status == 401){
+      toast.error("invalid token, session expired")
+      loginStore.toggleLogin()
+      return router.push("/")
     }
     throw new Error("Uh..oh Error fetching users, check the ide")
   },
-
+  enabled : !hasFetched.value
 })
 
-console.log(data)
+
+
+const getUser = (e :Event) => {
+  e.preventDefault()
+
+  const userFromEmails = userList.value.filter((user) => user?.email === searchItem.value)
+  const userFromName = userList.value.filter((user) => user?.name == searchItem.value)
+  const userFound = [...userFromName,...userFromEmails]
+  if(userFound.length == 0){
+    toast.error("No user found")
+    return
+  }
+  userList.value = userFound
+}
+
+const getAllusers = () => {
+  console.log(data.value)
+  if(data && Array.isArray(data.value)){
+    console.log("its checking")
+    userList.value = data.value
+  }
+
+}
+
 
 </script>
 <template>
@@ -51,33 +88,35 @@ console.log(data)
     </div>
     <div class="flex flex-col justify-center items-center space-y-6">
 
-      <h1 class="text-3xl">How do you do, {{user.name}}??</h1>
+      <h1 class="text-3xl">How do you do, {{user.name}}</h1>
 
 
       <form class="md:flex md:flex-row md:space-x-2 md:space-y-0 flex flex-col justify-center items-center space-y-4" @submit="getUser">
 
         <input
-            type="number"
+            type="text"
             placeholder="Enter the user ID"
-            class="input input-bordered input-primary w-full max-w-xs" />
+            class="input input-bordered input-primary w-full max-w-xs"  v-model="searchItem"/>
 
-        <button class="btn btn-active btn-primary"  >Search by user id</button>
+        <button class="btn btn-active btn-primary" >Search User</button>
       </form>
-      <form class="md:flex md:flex-row md:space-x-2 flex flex-col justify-center items-center space-y-4 md:space-y-0">
-
-        <input
-            type="email"
-            placeholder="Enter the user email"
-            class="input input-bordered input-primary w-full max-w-xs" />
-        <button class="btn btn-active btn-primary">Search by Email</button>
-      </form>
+      <button class="btn btn-primary" @click="getAllusers">Show all users</button>
 
     </div>
-    <div v-if="data" id="usertable" class="mt-20 flex flex-col text-center space-x-4" >
-      <div class="overflow-x-auto">
-        <h1 class="text-2xl"> USERS</h1>
+    <div  id="usertable" class="mt-20 flex flex-col text-center space-x-" >
 
-        <table class="table mt-10">
+      <div class="overflow-x-auto">
+
+        <h1 class="text-2xl"> USERS</h1>
+        <div v-if="isPending">
+          <span class="loading loading-bars loading-xs"></span>
+
+        </div>
+        <div v-if="isError || error">
+          <h1>Error</h1>
+        </div>
+
+        <table v-if="data"  class="table mt-10">
           <!-- head -->
           <thead>
           <tr>
@@ -86,14 +125,13 @@ console.log(data)
                 <input type="checkbox" class="checkbox" />
               </label>
             </th>
-            <th class="text-xl">Id</th>
+            <th class="text-xl"></th>
             <th class="text-xl">Name</th>
             <th class="text-xl">E-mail</th>
-            <th class="text-xl">Role</th>
             <th></th>
           </tr>
           </thead>
-          <tbody v-for="(user, index) in data">
+          <tbody v-for="(user, index) in userList">
           <!-- row 1 -->
           <tr>
             <th>
@@ -104,8 +142,11 @@ console.log(data)
             <td>
               <div class="flex items-center gap-3">
                 <div>
-                  <!--                  id goes here-->
-                  <div class="font-bold text-lg">{{ user.id }}</div>
+                  <div class="avatar placeholder">
+                    <div class="bg-neutral text-neutral-content w-24 rounded-full">
+                      <span class="text-3xl capitalize">{{user.name[0]}}</span>
+                    </div>
+                  </div>
 
                 </div>
               </div>
@@ -118,10 +159,6 @@ console.log(data)
               <!--              name goes here-->
               <span class="badge badge-ghost badge-sm text-lg">{{user.email}}</span>
             </td>
-            <td>
-              <!--              name goes here-->
-              <span class="badge badge-ghost badge-sm text-lg">{{user.role}}</span>
-            </td>
             <th>
               <form @submit="getToDetails">
               <button class="btn btn-ghost btn-xs text-lg" :value="user.id">Get Detailed Info</button>
@@ -129,17 +166,6 @@ console.log(data)
             </th>
           </tr>
           </tbody>
-          <!-- foot -->
-          <tfoot>
-          <tr>
-            <th></th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>E-mail</th>
-            <th>Role</th>
-            <th></th>
-          </tr>
-          </tfoot>
         </table>
       </div>
 
