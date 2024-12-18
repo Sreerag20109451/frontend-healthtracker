@@ -22,12 +22,11 @@ const login =  async  (e: Event) =>{
     })
 
     const token = resp.data.token
-    console.log(token)
     const loggedInuser = resp.data.user
-    console.log(loggedInuser)
     modalStore.toggleLoginModal()
     setUserToLocalStorage(loggedInuser)
     localStorage.setItem('token', token)
+    localStorage.setItem('sessionId', loggedInuser.id.toString())
     loginStore.setUser()
     loginStore.toggleLogin()
     console.log(`At success the modal open os ${isModalOpen.value}`)

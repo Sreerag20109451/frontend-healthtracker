@@ -9,7 +9,7 @@ const {user} = storeToRefs(useLoginStore())
 
 console.log(localStorage.getItem("token"))
 
-
+const Sessionid =localStorage.getItem("sessionId")
 
 const selectedID = ref<number|string|null>(null)
 
@@ -24,7 +24,8 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['user'], query
   {
     const response = await axiosInstance.get(`/users/`, {
       headers : {
-        "Authorization" : `Bearer ${localStorage.getItem('token')}`
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+        "Sessionid" : Sessionid
       },
       withCredentials:true
     })
