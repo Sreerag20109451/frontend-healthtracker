@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "https://healthtracker-application-production.up.railway.app/api/"
+export const baseUrl = "http://healthtracker-application-production.up.railway.app/api/"
 export const localUrl = "http://localhost:8085/api/"
 const sessionId = localStorage.getItem("sessionId")
 
