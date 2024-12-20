@@ -3,6 +3,7 @@ import Layout from "@/views/Layout.vue";
 import HomePage from "@/views/HomePage.vue";
 import Cards from "@/components/UserCard.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
+import Register from "@/components/Register.vue";
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -20,6 +21,11 @@ const routes: Array<RouteRecordRaw> = [
 
     ]
 
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register
   },
   {
     path: "/error",
