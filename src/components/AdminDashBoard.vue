@@ -50,10 +50,7 @@ console.log(data)
       </ul>
     </div>
     <div class="flex flex-col justify-center items-center space-y-6">
-
       <h1 class="text-3xl">How do you do, {{user.name}}??</h1>
-
-
       <form class="md:flex md:flex-row md:space-x-2 md:space-y-0 flex flex-col justify-center items-center space-y-4" @submit="getUser">
 
         <input

@@ -16,12 +16,6 @@
         <form>
           <button class="btn btn-primary">Show Activities</button>
         </form>
-        <form>
-          <button class="btn btn-secondary">Create an Activity</button>
-        </form>
-        <form>
-          <button class="btn btn btn-warning"> Delete an Activity</button>
-        </form>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ import { setActivePinia, createPinia } from 'pinia'
 import  {useLoginStore, ModalStore} from "@/store";
 import {getUserFromLocalStorage, setUserToLocalStorage} from "@/utils/utils";
 import {adminUser, normalUser} from "./Fixtures";
+import {mount} from "@vue/test-utils";
 jest.mock("@/utils/utils", () => (
         {
             getUserFromLocalStorage:jest.fn(),

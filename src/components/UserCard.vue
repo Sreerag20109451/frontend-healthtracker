@@ -16,12 +16,6 @@
         <form>
           <button class="btn btn-primary">Show Profile</button>
         </form>
-        <form>
-          <button class="btn btn-secondary">Update Profile</button>
-        </form>
-        <form>
-          <button class="btn btn-warning"> Delete Profile</button>
-        </form>
       </div>
     </div>
   </div>
