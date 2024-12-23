@@ -1,7 +1,6 @@
 .DS_Store
 node_modules
 /dist
-/src/utils/axiosInstance.ts
 /tests/e2e/videos/
 /tests/e2e/screenshots/
 
