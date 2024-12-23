@@ -95,8 +95,12 @@ const getAllusers = () => {
 
         <input
             type="text"
-            placeholder="Enter the username or email"
-            class="input input-bordered input-primary w-full max-w-xs"  v-model="searchItem"/>
+        <<<<<<< HEAD
+        placeholder="Enter the username or email"
+        =======
+        placeholder="Enter the user ID"
+        >>>>>>> 278ce6f2b04b276d2dacb042d81ff384878b0fd2
+        class="input input-bordered input-primary w-full max-w-xs"  v-model="searchItem"/>
 
         <button class="btn btn-active btn-primary" >Search User</button>
       </form>
