@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {useRoute} from "vue-router";
-import {useLoginStore} from "@/store";
 import {useQuery} from "@tanstack/vue-query";
 import {axiosInstance} from "@/utils/axiosInstance";
 import {toast} from "vue3-toastify";
@@ -15,7 +14,7 @@ let email = ref<String>("")
 let name = ref<String>("")
 
 
-const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], queryFn: async () =>
+const { isPending, data } = useQuery({ queryKey: ['userdeets'], queryFn: async () =>
   {
     try {
       const response = await axiosInstance.get(`/users/${id}`, {
@@ -54,7 +53,7 @@ const editUser = async (e :Event) => {
       withCredentials: true
     })
     if(response.status  == 200){
-      router.push(`/users/${id}`)
+      await router.push(`/users/${id}`)
     }
   }
   catch(err: unknown){
