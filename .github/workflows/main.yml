@@ -7,31 +7,44 @@ on:
 
 jobs:
   build:
-    name: Build  # Defines the name of the build job.
-    runs-on: ubuntu-latest  # Specifies the operating system for the job.
+    name: Build
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo  # Checks out the repository.
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Create Node Environment  # Sets up Node.js environment.
+      - name: Set Up Node Environment
         uses: actions/setup-node@v4
         with:
           node-version: 16.x
 
-      - name: Install Packages and Build Application  # Installs npm packages and builds the Vue.js application.
-        run: |
-          npm ci
-          npm run build
-  deploy:
-    name: Railway Deploy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Railway
-        run: npm i -g @railway/cli
-      - name: Deploy to Railway
-        run: railway up --service frontend-healthtracker --environment production
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Application
+        run: npm run build --verbose
+
+  deploy:
+    name: Deploy to Railway
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm i -g @railway/cli
+
+      - name: Deploy to Railway
+        run: railway up --service frontend --environment production
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
