@@ -6,12 +6,14 @@ import {axiosInstance} from "@/utils/axiosInstance";
 import {toast} from "vue3-toastify";
 import {ref} from "vue";
 import router from "@/router";
+import {AxiosError} from "axios";
 
 const route = useRoute()
 const {id} = route.params
 const Sessionid = localStorage.getItem("sessionId")
 let email = ref<String>("")
 let name = ref<String>("")
+
 
 const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], queryFn: async () =>
   {
@@ -36,19 +38,40 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], 
         position: toast.POSITION.TOP_CENTER
       })
     }
-  }
+  },
+  staleTime: 1000 * 60 * 60
 })
 
 const editUser = async (e :Event) => {
   e.preventDefault()
   const body = {name: name.value, email : email.value }
   try{
-    const response =  await axiosInstance.put(`/users/${id}`,body)
+    const response = await axiosInstance.put(`/users/${id}`, body, {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+        "Sessionid": Sessionid
+      },
+      withCredentials: true
+    })
     if(response.status  == 200){
       router.push(`/users/${id}`)
     }
   }
-  catch(e: unknown){
+  catch(err: unknown){
+    if(err instanceof  AxiosError && err.response){
+      if(err?.response.status == 400){
+
+        toast.error("This email is already in use",{
+          position: toast.POSITION.TOP_CENTER
+        })
+      }
+      if(err?.response.status == 404){
+
+        toast.error("Token expired, login Again",{
+          position: toast.POSITION.TOP_CENTER
+        })
+      }
+    }
 
 
 
@@ -66,7 +89,7 @@ const editUser = async (e :Event) => {
     <div v-if="isPending">
       <span class="loading loading-spinner loading-lg"></span>
     </div>
-    <form v-if="data" class="flex flex-col space-y-4" onsubmit="editUser">
+    <form v-if="data" class="flex flex-col space-y-4" @submit="editUser">
       <label class="input input-bordered flex items-center gap-2">
         Name
         <input type="text" class="grow"  :placeholder="name.value"   v-model="name" />
