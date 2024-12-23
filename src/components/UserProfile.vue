@@ -43,21 +43,31 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], 
 
    }
 
-  }
+  },
+  staleTime: 1000 * 60 * 60
 
 })
 
-const deleteUser =async  () =>{
+const deleteUser =async  (e: Event) =>{
+  e.preventDefault()
 
   try{
-    const response = await axiosInstance.delete(`/users/${id}`)
+    const response = await axiosInstance.delete(`/users/${id}`, {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+        "Sessionid": Sessionid
+      },
+      withCredentials: true
+    })
     if(response.status == 200){
       console.log(response)
       loginStore.toggleLogin()
       localStorage.clear()
-      router.push("/")
+      await router.push("/")
+
 
     }
+
   }
   catch(e: unknown){
     console.log(e)
@@ -109,7 +119,7 @@ const deleteUser =async  () =>{
             <form >
               <button class="btn btn-accent"><a :href="`/users/${data.id}/edit`">Edit</a></button>
             </form>
-            <form onsubmit="deleteUser">
+            <form @submit="deleteUser">
               <button class="btn btn-error"><a>Delete</a></button>
             </form>
           </div>

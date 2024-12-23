@@ -49,7 +49,8 @@ const { isPending, isError, data  , error } = useQuery({ queryKey: ['user'], que
     }
     throw new Error("Uh..oh Error fetching users, check the ide")
   },
-  enabled : !hasFetched.value
+  staleTime: 1000 * 60 * 60
+
 })
 
 
