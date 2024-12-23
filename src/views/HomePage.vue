@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
 import {useLoginStore} from "@/store";
 import DefaultHome from "@/views/DefaultHome.vue";
 import LoggedHome from "@/views/LoggedHome.vue";
