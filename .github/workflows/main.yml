@@ -18,7 +18,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 16.x
-
+      - name: Clear Cache
+        run: |
+         rm -rf node_modules
+         rm -f package-lock.json
+         npm install
+         
       - name: Install Packages and Build Application  # Installs npm packages and builds the Vue.js application.
         run: |
           npm ci
