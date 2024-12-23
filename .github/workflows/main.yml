@@ -27,7 +27,7 @@ jobs:
       - name: Install Packages and Build Application  # Installs npm packages and builds the Vue.js application.
         run: |
           npm ci
-          npm run build
+          npm run build --verbose
   deploy:
     name: Railway Deploy
     runs-on: ubuntu-latest
