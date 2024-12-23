@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {storeToRefs} from "pinia";
 import {ModalStore, useLoginStore} from "@/store";
+import router from "@/router";
 
 const logoImage =  require("../assets/excercise.jpeg")
 
@@ -13,6 +14,7 @@ const logout  = () =>{
   modalStore.toggleLoginModal()
   loginStore.toggleLogin()
   localStorage.removeItem("user")
+  router.push("/")
 
 }
 console.log(isLoggedIn)

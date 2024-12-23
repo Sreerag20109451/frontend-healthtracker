@@ -1,4 +1,15 @@
 <script setup lang="ts">
+import router from "@/router";
+
+const userId =localStorage.getItem("sessionId")
+const intId = parseInt(userId!!) || null
+
+const goToprofile = (e: Event) =>{
+  e.preventDefault()
+  router.push(`/users/${intId}`)
+}
+
+
 </script>
 
 <template>
@@ -14,7 +25,7 @@
       <p class="text-slate-900">Create Your Personalized Health Profile and Begin Your Journey!</p>
       <div class="card-actions flex flex-col justify-center items-center">
         <form>
-          <button class="btn btn-primary">Show Profile</button>
+          <button class="btn btn-primary" @click="goToprofile">Show Profile</button>
         </form>
       </div>
     </div>

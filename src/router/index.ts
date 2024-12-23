@@ -4,6 +4,8 @@ import HomePage from "@/views/HomePage.vue";
 import Cards from "@/components/UserCard.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import Register from "@/components/Register.vue";
+import UserProfile from "@/components/UserProfile.vue";
+import EditUser from "@/views/EditUser.vue";
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -18,9 +20,18 @@ const routes: Array<RouteRecordRaw> = [
         component :HomePage
 
       },
+      {
+        path: "users/:id",
+        name: "user",
+        component :UserProfile,
 
+      },
+      {
+        path:"users/:id/edit",
+        name: "Edit user",
+        component: EditUser
+      }
     ]
-
   },
   {
     path: "/register",
