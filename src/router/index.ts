@@ -4,7 +4,7 @@ import HomePage from "@/views/HomePage.vue";
 import Cards from "@/components/UserCard.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import Register from "@/components/Register.vue";
-import UserProfile from "@/components/UserProfile.vue";
+import UserProfile from "@/views/UserProfile.vue";
 import EditUser from "@/views/EditUser.vue";
 
 

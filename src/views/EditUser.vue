@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useRoute} from "vue-router";
-import {useQuery} from "@tanstack/vue-query";
+import {useQuery, useQueryClient} from "@tanstack/vue-query";
 import {axiosInstance} from "@/utils/axiosInstance";
 import {toast} from "vue3-toastify";
 import {ref} from "vue";
@@ -12,6 +12,7 @@ const {id} = route.params
 const Sessionid = localStorage.getItem("sessionId")
 let email = ref<String>("")
 let name = ref<String>("")
+const queryClient = useQueryClient()
 
 
 const { isPending, data } = useQuery({ queryKey: ['userdeets'], queryFn: async () =>
@@ -38,8 +39,9 @@ const { isPending, data } = useQuery({ queryKey: ['userdeets'], queryFn: async (
       })
     }
   },
-  staleTime: 1000 * 60 * 60
+  refetchOnWindowFocus:false
 })
+
 
 const editUser = async (e :Event) => {
   e.preventDefault()
@@ -53,6 +55,9 @@ const editUser = async (e :Event) => {
       withCredentials: true
     })
     if(response.status  == 200){
+
+      await queryClient.invalidateQueries({queryKey: ["userdeets"]});
+
       await router.push(`/users/${id}`)
     }
   }
@@ -71,8 +76,6 @@ const editUser = async (e :Event) => {
         })
       }
     }
-
-
 
   }
 
@@ -97,7 +100,7 @@ const editUser = async (e :Event) => {
         Email
         <input type="text" class="grow" :placeholder="email.value" v-model="email"/>
       </label>
-      <button class="btn btn-accent"><a :href="`/users/${data.id}/edit`">Edit</a></button>
+      <button type="submit" class="btn btn-accent">Edit</button>
     </form>
 
 

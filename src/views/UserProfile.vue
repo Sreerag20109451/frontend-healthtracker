@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {useRoute} from "vue-router";
-import {useQuery} from "@tanstack/vue-query";
+import {useQuery, useQueryClient} from "@tanstack/vue-query";
 import {axiosInstance} from "@/utils/axiosInstance";
 import {toast} from "vue3-toastify";
 import UserCard from "@/components/UserCard.vue";
@@ -10,6 +10,7 @@ import ActivitiesCard from "@/components/ActivitiesCard.vue";
 import UserDashboard from "@/components/UserDashboard.vue";
 import {useLoginStore} from "@/store";
 import router from "@/router";
+import {ref} from "vue";
 
 const Sessionid = localStorage.getItem("sessionId")
 
@@ -44,7 +45,7 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], 
    }
 
   },
-  staleTime: 1000 * 60 * 60
+  refetchOnWindowFocus:false
 
 })
 
@@ -82,9 +83,9 @@ const deleteUser =async  (e: Event) =>{
     <div class="w-2/3 mx-auto mt-20">
       <div class="breadcrumbs text-sm relative top-0 left-0">
         <ul>
-          <li><a class="text-slate-800 text-xl no-underline" href="/">Home</a></li>
-          <li><a class="text-slate-800 text-2xl no-underline" href="/">Dashboard</a></li>
-          <li><a class="text-slate-800 text-2xl no-underline" href="/">Profile</a></li>
+          <li><a class="text-slate-800 text-xl no-underline" href="/public">Home</a></li>
+          <li><a class="text-slate-800 text-2xl no-underline" href="/public">Dashboard</a></li>
+          <li><a class="text-slate-800 text-2xl no-underline" href="/public">Profile</a></li>
           <li></li>
         </ul>
       </div>
@@ -116,9 +117,7 @@ const deleteUser =async  (e: Event) =>{
             </tbody>
           </table>
           <div class="mt-10 flex flex-row space-x-4 justify-center items-center">
-            <form >
               <button class="btn btn-accent"><a :href="`/users/${data.id}/edit`">Edit</a></button>
-            </form>
             <form @submit="deleteUser">
               <button class="btn btn-error"><a>Delete</a></button>
             </form>
