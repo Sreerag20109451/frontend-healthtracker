@@ -6,6 +6,7 @@ import ErrorPage from "@/views/ErrorPage.vue";
 import Register from "@/components/Register.vue";
 import UserProfile from "@/views/UserProfile.vue";
 import EditUser from "@/views/EditUser.vue";
+import UserActivities from "@/views/UserActivities.vue";
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -30,7 +31,14 @@ const routes: Array<RouteRecordRaw> = [
         path:"users/:id/edit",
         name: "Edit user",
         component: EditUser
-      }
+      },
+      {
+        path: "users/:id/activities",
+        name: "userActivities",
+        component :UserActivities,
+
+      },
+
     ]
   },
   {

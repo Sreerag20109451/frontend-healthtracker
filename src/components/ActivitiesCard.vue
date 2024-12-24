@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const id = localStorage.getItem("sessionId")
 </script>
 
 <template>
@@ -13,9 +14,7 @@
       <h2 class="card-title"> Manage your Activities</h2>
       <p class="text-slate-900">Track Every Activity and Stay on Top of Your Health Goals</p>
       <div class="card-actions flex flex-col justify-center items-center">
-        <form>
-          <button class="btn btn-primary">Show Activities</button>
-        </form>
+          <button class="btn btn-primary" ><a :href="`/users/${id}/activities`">Show Activities</a></button>
       </div>
     </div>
   </div>

@@ -83,9 +83,9 @@ const deleteUser =async  (e: Event) =>{
     <div class="w-2/3 mx-auto mt-20">
       <div class="breadcrumbs text-sm relative top-0 left-0">
         <ul>
-          <li><a class="text-slate-800 text-xl no-underline" href="/public">Home</a></li>
-          <li><a class="text-slate-800 text-2xl no-underline" href="/public">Dashboard</a></li>
-          <li><a class="text-slate-800 text-2xl no-underline" href="/public">Profile</a></li>
+          <li><a class="text-slate-800 text-xl no-underline" href="/">Home</a></li>
+          <li><a class="text-slate-800 text-2xl no-underline" href="/">Dashboard</a></li>
+          <li><a class="text-slate-800 text-2xl no-underline" href="/">Profile</a></li>
           <li></li>
         </ul>
       </div>

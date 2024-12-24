@@ -7,7 +7,7 @@ const sessionId = localStorage.getItem("sessionId")
 
 
 export const axiosInstance = axios.create({
-    baseURL: baseUrl,
+    baseURL: localUrl,
     headers: {'Content-Type' : "application/json", "Sessionid" : sessionId },
 
 });
