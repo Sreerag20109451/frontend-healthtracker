@@ -154,16 +154,19 @@ const getAllusers = () => {
             </td>
             <td>
               <!--              name goes here-->
-              <span class="badge badge-ghost badge-sm text-lg">{{user.name}}</span>
+              <span class="badge badge-ghost badge-sm text-lg"> <a :href="`/users/${user.id}`">{{user.name}}</a> </span>
             </td>
             <td>
               <!--              name goes here-->
               <span class="badge badge-ghost badge-sm text-lg">{{user.email}}</span>
             </td>
             <th>
-              <form @submit="getToDetails">
-                <button class="btn btn-ghost btn-xs text-lg" :value="user.id">Get Detailed Info</button>
-              </form>
+
+              <button class="btn btn-ghost btn-xs text-lg" > <a :href="`/users/${user.id}/activities`">Get Activities</a></button>
+            </th>
+            <th>
+
+              <button class="btn btn-ghost btn-xs text-lg" > <a :href="`/users/${user.id}/indicators`">Get Health Stats</a></button>
             </th>
           </tr>
           </tbody>

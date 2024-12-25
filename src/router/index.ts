@@ -7,6 +7,7 @@ import Register from "@/components/Register.vue";
 import UserProfile from "@/views/UserProfile.vue";
 import EditUser from "@/views/EditUser.vue";
 import UserActivities from "@/views/UserActivities.vue";
+import HealthStats from "@/views/HealthStats.vue";
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -37,6 +38,11 @@ const routes: Array<RouteRecordRaw> = [
         name: "userActivities",
         component :UserActivities,
 
+      },
+      {
+        path:"users/:id/indicators",
+        name: "stats",
+        component: HealthStats
       },
 
     ]

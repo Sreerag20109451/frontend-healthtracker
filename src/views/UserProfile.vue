@@ -17,6 +17,7 @@ const Sessionid = localStorage.getItem("sessionId")
 const route = useRoute()
 const {id} = route.params
 const loginStore = useLoginStore()
+const isAdmin = loginStore.isAdmin
 
 
 const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], queryFn: async () =>
@@ -118,7 +119,7 @@ const deleteUser =async  (e: Event) =>{
           </table>
           <div class="mt-10 flex flex-row space-x-4 justify-center items-center">
               <button class="btn btn-accent"><a :href="`/users/${data.id}/edit`">Edit</a></button>
-            <form @submit="deleteUser">
+            <form v-if="!isAdmin"  @submit="deleteUser">
               <button class="btn btn-error"><a>Delete</a></button>
             </form>
           </div>
