@@ -161,11 +161,9 @@ const getAllusers = () => {
               <span class="badge badge-ghost badge-sm text-lg">{{user.email}}</span>
             </td>
             <th>
-
               <button class="btn btn-ghost btn-xs text-lg" > <a :href="`/users/${user.id}/activities`">Get Activities</a></button>
             </th>
             <th>
-
               <button class="btn btn-ghost btn-xs text-lg" > <a :href="`/users/${user.id}/indicators`">Get Health Stats</a></button>
             </th>
           </tr>

@@ -3,6 +3,7 @@ import {ref} from "vue";
 import {axiosInstance} from "@/utils/axiosInstance";
 import {toast} from "vue3-toastify";
 import {useRoute, useRouter} from "vue-router";
+import {AxiosError} from "axios";
 const Sessionid = localStorage.getItem("sessionId")
 
 const route = useRoute()
@@ -51,13 +52,25 @@ const createHealthStat = async (e: Event) => {
         position: toast.POSITION.TOP_CENTER
       })
 
+      resetForm()
 
     }
   }catch(err: unknown){
 
-    toast.error("Error creating health stats", {
-      position: toast.POSITION.TOP_CENTER
-    })
+    if(err instanceof  AxiosError && err.response){
+      if(err?.response.status == 404){
+
+        toast.error("There is no user",{
+          position: toast.POSITION.TOP_CENTER
+        })
+      }
+      if(err?.response.status == 401){
+
+        toast.error("Token expired, login Again",{
+          position: toast.POSITION.TOP_CENTER
+        })
+      }
+    }
   }
 
 }

@@ -11,6 +11,7 @@ import UserDashboard from "@/components/UserDashboard.vue";
 import {useLoginStore} from "@/store";
 import router from "@/router";
 import {ref} from "vue";
+import {AxiosError} from "axios";
 
 const Sessionid = localStorage.getItem("sessionId")
 
@@ -18,11 +19,15 @@ const route = useRoute()
 const {id} = route.params
 const loginStore = useLoginStore()
 const isAdmin = loginStore.isAdmin
+let generatedReport = ref(false)
+
+let reportData =ref(null)
 
 
 const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], queryFn: async () =>
   {
-   try {
+
+    try {
 
      const response = await axiosInstance.get(`/users/${id}`, {
        headers: {
@@ -33,7 +38,6 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], 
      })
      if (response.status == 200) {
 
-       console.log(response.data.data)
        return response.data.data
      }
    }
@@ -49,6 +53,7 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], 
   refetchOnWindowFocus:false
 
 })
+
 
 const deleteUser =async  (e: Event) =>{
   e.preventDefault()
@@ -122,13 +127,15 @@ const deleteUser =async  (e: Event) =>{
             <form v-if="!isAdmin"  @submit="deleteUser">
               <button class="btn btn-error"><a>Delete</a></button>
             </form>
+            <button class="btn btn-primary"> <a :href="`/users/${id}/details`">Generate Report</a></button>
+
           </div>
 
 
-        </div>
-        </div>
 
 
+        </div>
+        </div>
     </div>
   </section>
 
