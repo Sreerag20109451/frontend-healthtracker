@@ -39,12 +39,16 @@ const { isPending, data } = useQuery({ queryKey: ['userdeets'], queryFn: async (
       })
     }
   },
-  refetchOnWindowFocus:false
+  staleTime: 1000 * 60 * 60
 })
 
 
 const editUser = async (e :Event) => {
   e.preventDefault()
+
+  toast.warning("User is being edited",{
+    position: toast.POSITION.TOP_CENTER
+  })
   const body = {name: name.value, email : email.value }
   try{
     const response = await axiosInstance.put(`/users/${id}`, body, {

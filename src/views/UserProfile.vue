@@ -11,17 +11,23 @@ import UserDashboard from "@/components/UserDashboard.vue";
 import {useLoginStore} from "@/store";
 import router from "@/router";
 import {ref} from "vue";
+import {AxiosError} from "axios";
 
 const Sessionid = localStorage.getItem("sessionId")
 
 const route = useRoute()
 const {id} = route.params
 const loginStore = useLoginStore()
+const isAdmin = loginStore.isAdmin
+let generatedReport = ref(false)
+
+let reportData =ref(null)
 
 
 const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], queryFn: async () =>
   {
-   try {
+
+    try {
 
      const response = await axiosInstance.get(`/users/${id}`, {
        headers: {
@@ -32,7 +38,6 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], 
      })
      if (response.status == 200) {
 
-       console.log(response.data.data)
        return response.data.data
      }
    }
@@ -48,6 +53,7 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], 
   refetchOnWindowFocus:false
 
 })
+
 
 const deleteUser =async  (e: Event) =>{
   e.preventDefault()
@@ -83,9 +89,9 @@ const deleteUser =async  (e: Event) =>{
     <div class="w-2/3 mx-auto mt-20">
       <div class="breadcrumbs text-sm relative top-0 left-0">
         <ul>
-          <li><a class="text-slate-800 text-xl no-underline" href="/public">Home</a></li>
-          <li><a class="text-slate-800 text-2xl no-underline" href="/public">Dashboard</a></li>
-          <li><a class="text-slate-800 text-2xl no-underline" href="/public">Profile</a></li>
+          <li><a class="text-slate-800 text-xl no-underline" href="/">Home</a></li>
+          <li><a class="text-slate-800 text-2xl no-underline" href="/">Dashboard</a></li>
+          <li><a class="text-slate-800 text-2xl no-underline" href="/">Profile</a></li>
           <li></li>
         </ul>
       </div>
@@ -118,16 +124,18 @@ const deleteUser =async  (e: Event) =>{
           </table>
           <div class="mt-10 flex flex-row space-x-4 justify-center items-center">
               <button class="btn btn-accent"><a :href="`/users/${data.id}/edit`">Edit</a></button>
-            <form @submit="deleteUser">
+            <form v-if="!isAdmin"  @submit="deleteUser">
               <button class="btn btn-error"><a>Delete</a></button>
             </form>
+            <button class="btn btn-primary"> <a :href="`/users/${id}/details`">Generate Report</a></button>
+
           </div>
 
 
-        </div>
-        </div>
 
 
+        </div>
+        </div>
     </div>
   </section>
 

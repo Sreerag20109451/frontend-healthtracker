@@ -16,6 +16,7 @@ let role = ref<String>("user")
 const register = async (e: Event) => {
   e.preventDefault()
   const body = {name: name.value, email: email.value, password: password.value, role: role.value}
+  console.log(body)
   try{
     const resp = await axiosInstance.post("/users",body)
     if(resp.status ==201) {
@@ -84,7 +85,7 @@ const register = async (e: Event) => {
             </svg>
             <input type="password" class="grow" placeholder="Password"  name="password" v-model="password" required/>
           </label>
-          <select class="select select-bordered w-full max-w-xs">
+          <select  v-model="role" class="select select-bordered w-full max-w-xs">
             <option disabled selected> Select the role</option>
             <option>user</option>
             <option>admin</option>
