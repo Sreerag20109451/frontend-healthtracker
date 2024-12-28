@@ -87,7 +87,9 @@ const deleteActivity =async  ( actId: number | string) =>{
         position : toast.POSITION.TOP_CENTER
       })
 
+
       await queryClient.invalidateQueries({queryKey: ["useracts"]})
+      return response.data.data
 
     }
 

@@ -91,6 +91,7 @@ const register = async (e: Event) => {
             <option>admin</option>
           </select>
           <button class="btn btn-block btn btn-primary"  type="submit">Register User</button>
+          <button class="btn btn-block btn btn-warning"  type="button" @click="()=> router.push('/')" >Back</button>
         </form>
       </div>
     </div>

@@ -26,9 +26,7 @@ let reportData =ref(null)
 
 const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], queryFn: async () =>
   {
-
     try {
-
      const response = await axiosInstance.get(`/users/${id}`, {
        headers: {
          "Authorization": `Bearer ${localStorage.getItem('token')}`,

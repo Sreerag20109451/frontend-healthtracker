@@ -67,7 +67,7 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], 
   <div v-if="error" class="flex flex-col space-y-2 justify-center items-center">
     <h1 class="text-3xl">There is not enough information. Add health stats</h1>
   </div>
-  <div v-if="data" class="mt-20 text-center">
+  <div v-if="data && data.indicators" class="mt-20 text-center">
     <h1 class="text-5xl text-red-900">Health Report</h1>
     <div class="overflow x-auto mt-10">
       <table class="table">
@@ -103,13 +103,13 @@ const { isPending, isError, data, error } = useQuery({ queryKey: ['userdeets'], 
       </table>
       </div>
     </div>
-      <div v-if="data?.risks" class="mt-20">
+      <div v-if="data?.risks?.length>0" class="mt-20">
         <h4 class="text-lg text-slate-900 text-center">From your health stats, you are on path to have below health risks</h4>
           <ul v-for="(risk,ind) of data.risks" >
             <li class="text-md list-disc text-slate-900">{{risk}}</li>
           </ul>
         </div>
-      <div v-if="data?.risks" class="mt-20">
+      <div v-if="data?.diets?.length>0" class="mt-20">
         <h4 class="text-lg text-slate-900 text-center"> We advise you to follow below diets </h4>
         <ul v-for="(diet,ind) of data.diets" >
           <li class="text-md list-disc text-slate-900">{{diet.dietname +" containing,"+diet.content}}</li>

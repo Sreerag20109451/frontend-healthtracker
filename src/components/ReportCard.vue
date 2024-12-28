@@ -1,4 +1,8 @@
 <script setup lang="ts">
+
+defineProps({
+  id: Number
+})
 </script>
 
 <template>
@@ -14,7 +18,7 @@
       <p class="text-slate-900">Create Your Personalized and Detailed Health Reports and Insights!</p>
       <div class="card-actions flex flex-col justify-center items-center">
         <form>
-          <button class="btn btn-primary">Generate Report</button>
+          <button class="btn btn-primary"><a :href="`/users/${id}/details`">Generate Report</a></button>
         </form>
 
       </div>
