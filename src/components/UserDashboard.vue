@@ -7,6 +7,7 @@ import UserCard from "@/components/UserCard.vue";
 import ActivitiesCard from "@/components/ActivitiesCard.vue";
 import ReportCard from "@/components/ReportCard.vue";
 const {user} = storeToRefs(useLoginStore())
+const id =  parseInt(localStorage.getItem("sessionId")!!)
 const operationLink = ref(null)
 </script>
 <template>
@@ -22,7 +23,7 @@ const operationLink = ref(null)
     <div class="grid grid-cols-1 md:grid-cols-3 md:gap-x-16 gap-y-10">
       <UserCard/>
       <ActivitiesCard/>
-      <ReportCard/>
+      <ReportCard :id="id"/>
     </div>
   </div>
 </section>

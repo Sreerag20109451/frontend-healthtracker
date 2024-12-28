@@ -98,9 +98,7 @@ const login =  async  (e: Event) =>{
         </div>
         <div class="mt-10 flex flex-col  items-center">
           <p class="text-xl text-slate-950"> Do not have an account?!</p>
-          <form>
             <button class="btn btn-block  btn-primary" @click="()=> router.push(`/register`)">Register Now</button>
-          </form>
 
         </div>
       </div>
